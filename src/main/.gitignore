@@ -1,0 +1,26 @@
+# Ignore cache files
+*.pyc
+__pycache__/
+
+# Ignore environment and package files
+.env
+*.env
+*.log
+*.sqlite3
+
+# Ignore editor/IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore dependency directories
+venv/
+env/
+node_modules/
+
+# Add any other files or directories you wish to ignore below this line
