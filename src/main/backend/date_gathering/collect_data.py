@@ -1,6 +1,6 @@
 from nba_api.stats.endpoints import scoreboard
 from nba_api.stats.endpoints import commonallplayers
-from nba_api.stats.static import players
+from nba_api.stats.static import players, teams
 from nba_api.stats.endpoints import commonteamroster
 from nba_api.stats.endpoints import playergamelog, teamgamelog
 from utils.utils import DatabaseUtils
@@ -40,6 +40,13 @@ class CollectRawNBAData:
         self.db.save_in_db_if_exists(df_team_roster, 'team_roster_2324')
         print('Team Roster DF saved in DB')
         return df_team_roster
+    
+    def get_team_info(self) -> pd.DataFrame:
+        df_team_info = pd.DataFrame(teams.get_teams())
+        self.db.save_in_db_if_exists(df_team_info, 'team_info_2324')
+
+        print('team_info_2324 DF saved in DB')
+        return df_team_info
  
     def get_players_games_log(self, df_players: pd.DataFrame) -> pd.DataFrame:
         game_logs_arr = []
@@ -68,5 +75,6 @@ class CollectRawNBAData:
         return df_all_team_game_logs
  
     def gather_and_import_nba_data(self):
-        df_players = self.get_players()
-        return df_players
+        df_team_info = self.get_team_info()
+
+        return df_team_info

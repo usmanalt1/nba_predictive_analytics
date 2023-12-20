@@ -15,15 +15,11 @@ __pycache__/
 *.sublime-workspace
 
 # Ignore system files
-*.DS_Store
+.DS_Store
 Thumbs.db
 
 # Ignore dependency directories
 venv/
 env/
 node_modules/
-<<<<<<< HEAD
-
-=======
->>>>>>> b4068fc (amending)
 # Add any other files or directories you wish to ignore below this line
