@@ -7,7 +7,7 @@ class StatHelper:
 
         return df
     
-    def calculate_cumlative_sums(df: pd.DataFrame, group_by_columns: [str, str], assign_df_column_name: str, df_column_name: str) -> pd.DataFrame:
+    def calculate_cumlative_sums(self, df: pd.DataFrame, group_by_columns: [str, str], assign_df_column_name: str, df_column_name: str) -> pd.DataFrame:
         df[assign_df_column_name] = df.groupby(group_by_columns)[df_column_name].cumsum()
 
     def logs_cumlative(self, df) -> pd.DataFrame:
@@ -22,3 +22,4 @@ class StatHelper:
         # df_player_logs_cum_sum_plus_minus = self.calculate_cumlative_sums(df_player_logs_cum_sum_fgpct3, grouped_cols, "+-_cumlative_sum", "plus_mnus")
 
         return df_fgpct3
+    
