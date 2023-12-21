@@ -9,8 +9,8 @@ import sqlalchemy
 
 
 class DatabaseUtils:
-    def __init__(self):
-        self.db_url="mysql+pymysql://root:""@127.0.0.1:3306/nba"
+    def __init__(self, db_url):
+        self.db_url= db_url
         self.connection = create_engine(self.db_url, echo=True)
     
     def create_db(self):

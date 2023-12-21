@@ -7,21 +7,16 @@ import pandas as pd
 from db_models.create_models import CreateModels
 
 def main() -> pd.DataFrame:
-    # ExtractAndSaveNbaData("2022").create_dfs()
-    # CreateModelBasedOnSeason(year="2022").get_team_rankings()
-    # db = DatabaseUtils()
-    # CollectRawNBAData(season_year="2023-24").gather_and_import_nba_data()
-    # df_games_played = db.read_table("games_played_2324")
-    # df_players_info = db.read_table("players_2324")
-    # df_team_roster = db.read_table("team_roster_2324")
-    # df_player_game_logs = db.read_table("player_game_logs_2324")
-    # df_team_game_logs = db.read_table("team_game_logs_2324")
-    # df_team_game_logs = db.read_table("team_info_2324")
+    get_raw_tables = ""
+    save_raw_table_s3 = ""
+    build_raw_model = ""
+    save_raw_tables = ""
+    build_analytics = ""
+    save_analytics_table = ""
 
     # CreateAnalytics(df_player_game_logs, df_players_info, df_games_played, df_team_game_logs, df_team_game_logs).generate()
-    CreateModels.create()
-
-    
+    created = CreateModels("mysql+pymysql://root:""@127.0.0.1:3306/nba_test", "2014")
+    created.create()
 
 if __name__ == "__main__":
     main()
