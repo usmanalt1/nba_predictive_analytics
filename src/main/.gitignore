@@ -22,4 +22,7 @@ Thumbs.db
 venv/
 env/
 node_modules/
+.terraform.*
+terraform.*
+terraform-*
 # Add any other files or directories you wish to ignore below this line
