@@ -25,4 +25,6 @@ node_modules/
 .terraform.*
 terraform.*
 terraform-*
+.DS_Store
+__init__.py
 # Add any other files or directories you wish to ignore below this line

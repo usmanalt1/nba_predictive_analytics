@@ -1,0 +1,8 @@
+sqlalchemy
+psycopg2
+pytz
+mysqlclient
+pymysql
+cryptography
+nba_api
+boto3

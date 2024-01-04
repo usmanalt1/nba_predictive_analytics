@@ -11,13 +11,13 @@ class SeasonInfo(RawModel):
     __tablename__ = f"season_info"
 
     id = Column(Integer, primary_key=True)
-    season_year = Column(Integer)
+    season_id = Column(Integer)
 
 class TeamInfo(RawModel):
     __tablename__ = f"team_info"
 
     id = Column(Integer, primary_key=True)
-    season_id = Column(Integer, ForeignKey(f"season_info.id"))
+    season_id = Column(Integer)
     full_name = Column(String(255))
     abbreviation = Column(String(255))
     nickname = Column(String(255))
@@ -25,14 +25,12 @@ class TeamInfo(RawModel):
     state = Column(String(255))
     year_founded = Column(Integer)
 
-    team_info = relationship("SeasonInfo", backref=f"team_info")
-
 class TeamLogsStats(RawModel):
     __tablename__ = f"team_logs"
 
     id = Column(Integer, primary_key=True)
-    team_id = Column(Integer, ForeignKey(f"team_info.id"))
-    season_id = Column(Integer, ForeignKey(f"season_info.id"))
+    team_id = Column(Integer)
+    season_id = Column(Integer)
     game_id = Column(String(255))
     game_date = Column(Date)
     matchup = Column(String(255))
@@ -60,27 +58,22 @@ class TeamLogsStats(RawModel):
     pf = Column(Integer)
     pts = Column(Integer)
 
-    team_logs = relationship("TeamInfo", backref=f"team_logs")
-    season_info = relationship("SeasonInfo", backref=f"team_logs")
-
 class PlayerInfo(RawModel):
     __tablename__ = "player_info"
 
     id = Column(Integer, primary_key=True)
-    season_id = Column(Integer, ForeignKey(f"season_info.id"))
+    season_id = Column(Integer)
     full_name = Column(String(255))
     first_name = Column(String(255))
     last_name = Column(String(255))
     is_active = Column(Boolean)
 
-    season_info = relationship("SeasonInfo", backref=f"player_info")
-
 class PlayerLogsStats(RawModel):
     __tablename__ = "player_logs"
 
     id = Column(Integer, primary_key=True)  
-    player_id = Column(Integer, ForeignKey("player_info.id"))
-    season_id = Column(Integer, ForeignKey(f"season_info.id"))
+    player_id = Column(Integer)
+    season_id = Column(Integer)
     game_id = Column(String(255))
     game_date = Column(Date)
     matchup = Column(String(255))
@@ -107,6 +100,15 @@ class PlayerLogsStats(RawModel):
     plus_minus = Column(Integer)
     video_available = Column(Boolean)
 
-    player_logs = relationship("PlayerInfo", backref="player_logs")
-    season_info = relationship("SeasonInfo", backref=f"player_logs")
+
+class TeamRoster(RawModel):
+    __tablename__ = f"team_roster"
+
+    id = Column(Integer, primary_key=True)
+    team_id = Column(Integer)
+    player = Column(String(255))
+    age = Column(Integer)
+    player_id = Column(Integer)
+    season_id = Column(Integer)
+
 
