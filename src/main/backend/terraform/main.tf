@@ -10,28 +10,68 @@ output "iam_user_id" {
   value = aws_iam_user.morning_analytics.id
 }
 
-resource "aws_iam_policy" "s3_access_policy" {
-  name        = "S3AccessPolicy"
-  description = "Allows morning_analytics user to upload objects to S3"
+resource "aws_iam_policy" "access_policy" {
+  name        = "AccessPolicy"
+  description = "Allows morning_analytics user to main services"
 
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
       Effect   = "Allow",
-      Action   = [
-        "s3:PutObject",
-        "s3:GetObject",
-        "s3:ListBucket"
-      ],
-      Resource = [
-        "arn:aws:s3:::your-bucket-name",  
-        "arn:aws:s3:::your-bucket-name/*"
-      ]
-    }]
-  })
+      Action = "s3:*",
+      Resource = "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "rds:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "rds-db:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "ec2:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "iam:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "cloudwatch:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "sqs:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "sns:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "autoscaling:*",
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": "elasticloadbalancing:*",
+      "Resource": "*"
+    }
+    ]})
 }
 
-resource "aws_iam_user_policy_attachment" "attach_s3_policy" {
+
+
+resource "aws_iam_user_policy_attachment" "access_policy" {
   user       = "morning_analytics"  # Replace with your IAM username
-  policy_arn = aws_iam_policy.s3_access_policy.arn
+  policy_arn = aws_iam_policy.access_policy.arn
 }

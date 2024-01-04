@@ -34,3 +34,4 @@ class DatabaseUtils:
     def save_in_db_if_exists(self, df, table_name):
         df.to_sql(table_name, con = self.connection, if_exists='replace', index=False)
 
+

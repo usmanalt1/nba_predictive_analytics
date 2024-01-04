@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  mysql-host:
+    image: mysql
+    volumes:
+    - ./${PROJECT_DIR}/mysql_dumps:/docker-entrypoint-initdb.d
+    environment:
+        MYSQL_ROOT_PASSWORD: admin
+        MYSQL_DATABASE: my_app_database
+        MYSQL_USER: admin
+        MYSQL_PASSWORD: admin
+        MYSQL_TCP_PORT: 3307
+    ports:
+      - "3307:3307"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  nba_app_backend:
+    build: .
+    depends_on:
+      mysql-host:
+        condition: service_healthy
+    volumes:
+      - type: bind
+        source: ./backend/
+        target: /nba_app/backend/
+    container_name: nba_app_backend
+        
+  
